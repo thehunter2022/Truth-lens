@@ -14,9 +14,9 @@ log = logging.getLogger("news-service")
 
 class NewsService:
 
-    BASE_URL = "https://gnews.io/api/v4"
+    BASE_URL = "https://newsapi.org/v2"
 
-    API_KEY = settings.GNEWS_API_KEY or os.getenv("GNEWS_API_KEY")
+    API_KEY = settings.NEWS_API_KEY
 
     session = requests.Session()
 
@@ -40,10 +40,10 @@ class NewsService:
 
         if not cls.API_KEY:
             raise RuntimeError(
-                "Missing GNEWS_API_KEY configuration. Live news requires a valid GNews API key."
+                "Missing NewsAPI_KEY configuration. Live news requires a valid GNews API key."
             )
 
-        params["apikey"] = cls.API_KEY
+        params["apiKey"] = cls.API_KEY
 
         try:
             response = cls.session.get(
@@ -54,11 +54,11 @@ class NewsService:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.Timeout as ex:
-            log.error("GNews timeout: %s", ex)
+            log.error("NewsAPI timeout: %s", ex)
             raise RuntimeError("GNews request timed out. Please try again later.") from ex
         except requests.exceptions.RequestException as ex:
-            log.error("GNews request failed: %s", ex)
-            raise RuntimeError(f"GNews request failed: {ex}") from ex
+            log.error("NewsAPI request failed: %s", ex)
+            raise RuntimeError(f"NewsAPI request failed: {ex}") from ex
 
     @classmethod
     def get_latest_news(
@@ -74,8 +74,7 @@ class NewsService:
             {
                 "category": category,
                 "country": country,
-                "lang": language,
-                "max": max_results,
+                "pageSize": max_results,
             },
         )
 
@@ -91,12 +90,12 @@ class NewsService:
     ) -> List[Dict]:
 
         data = cls._request(
-            "search",
+            "everything",
             {
                 "q": query,
-                "lang": language,
-                "country": country,
-                "max": max_results,
+                "language": language,
+                "pageSize": max_results,
+                "sortBy": "publishedAt",
             },
         )
 
