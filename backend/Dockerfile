@@ -30,6 +30,7 @@ COPY schemas/         ./schemas/
 COPY models/          ./models/
 COPY middleware/       ./middleware/
 COPY utils/           ./utils/
+COPY static/          ./static/
 
 # Create an empty saved_model dir (HF will download model at runtime)
 RUN mkdir -p saved_model
@@ -42,4 +43,6 @@ ENV TRANSFORMERS_CACHE=/tmp/hf_cache
 EXPOSE 8000
 
 # Start command — Render overrides the port via $PORT env var
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+EXPOSE 7860
+
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-7860}"]
