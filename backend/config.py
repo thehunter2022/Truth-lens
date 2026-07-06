@@ -50,16 +50,14 @@ class Settings(BaseModel):
     DATABASE_URL: str = Field(default_factory=lambda: _resolve_database_url(os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./verifyai.db")))
     
     # External APIs
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GNEWS_API_KEY: str = os.getenv("GNEWS_API_KEY", "")
-    FIREBASE_PROJECT_ID: str = os.getenv("FIREBASE_PROJECT_ID", "")
-    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
-    GNEWS_API_KEY: str = os.getenv("GNEWS_API_KEY", "")
-    FIREBASE_PROJECT_ID: str = os.getenv("FIREBASE_PROJECT_ID", "")
-    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
+# External APIs
+GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+NEWS_API_KEY: str = os.getenv("NEWS_API_KEY", "")
+FIREBASE_PROJECT_ID: str = os.getenv("FIREBASE_PROJECT_ID", "")
+GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
     
     # CORS
-    CORS_ORIGINS: List[str] = [
+CORS_ORIGINS: List[str] = [
         origin.strip() for origin in os.getenv("CORS_ORIGINS", "").split(",") if origin.strip()
     ] or [
         "http://localhost:3000",
@@ -69,10 +67,10 @@ class Settings(BaseModel):
     ]
     
     # Rate Limiting
-    RATE_LIMIT_LOGIN_PER_MIN: int = 5
-    RATE_LIMIT_REGISTER_PER_MIN: int = 3
-    RATE_LIMIT_PREDICT_PER_MIN: int = 30
-    RATE_LIMIT_CHAT_PER_MIN: int = 20
+RATE_LIMIT_LOGIN_PER_MIN: int = 5
+RATE_LIMIT_REGISTER_PER_MIN: int = 3
+RATE_LIMIT_PREDICT_PER_MIN: int = 30
+RATE_LIMIT_CHAT_PER_MIN: int = 20
 
 # Create settings singleton
 settings = Settings()
