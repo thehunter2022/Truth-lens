@@ -64,7 +64,6 @@ class Settings(BaseModel):
     # External APIs
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     NEWS_API_KEY: str = os.getenv("NEWS_API_KEY", "")
-    GNEWS_API_KEY: str = os.getenv("GNEWS_API_KEY", "")
     FIREBASE_PROJECT_ID: str = os.getenv("FIREBASE_PROJECT_ID", "")
     GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
 
