@@ -10,7 +10,7 @@ WORKDIR /frontend
 
 # Copy frontend source
 COPY frontend-only/client/package.json frontend-only/client/package-lock.json* ./
-RUN npm install --ignore-scripts=false 2>/dev/null || npm install
+RUN npm install --legacy-peer-deps
 
 COPY frontend-only/client/ ./
 
