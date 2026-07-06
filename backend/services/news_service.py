@@ -40,7 +40,7 @@ class NewsService:
 
         if not cls.API_KEY:
             raise RuntimeError(
-                "Missing NewsAPI_KEY configuration. Live news requires a valid GNews API key."
+                "Missing NewsAPI_KEY configuration. Live news requires a valid NEWSAPI key."
             )
 
         params["apiKey"] = cls.API_KEY
@@ -55,7 +55,7 @@ class NewsService:
             return response.json()
         except requests.exceptions.Timeout as ex:
             log.error("NewsAPI timeout: %s", ex)
-            raise RuntimeError("GNews request timed out. Please try again later.") from ex
+            raise RuntimeError("NewsAPI request timed out. Please try again later.") from ex
         except requests.exceptions.RequestException as ex:
             log.error("NewsAPI request failed: %s", ex)
             raise RuntimeError(f"NewsAPI request failed: {ex}") from ex

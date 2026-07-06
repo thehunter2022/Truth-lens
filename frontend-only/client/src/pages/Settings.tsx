@@ -184,7 +184,7 @@ export default function Settings() {
                   <Radio className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                   Live News API Pool
                 </div>
-                <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">GNews Global HEAD</p>
+                <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">NewsAPI Global HEAD</p>
                 <p className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 flex items-center gap-1">
                   <span className="h-2 w-2 rounded-full bg-emerald-500" /> Operational
                 </p>
